@@ -199,8 +199,5 @@ vs salary, and headcount trends.
   chose to answer compensation questions). Treat 2024 salary figures as indicative only.
 - **Primary dev type only**: respondents can select multiple dev types; this analysis
   uses only the first listed value for aggregation.
-<<<<<<< HEAD
-=======
 
 ![CI](https://github.com/NguyenIslandBoy/stack-overflow-dev-survey/actions/workflows/ci.yml/badge.svg)
->>>>>>> f255b54 (docs: add CI badge, update paths to reflect new structure)
