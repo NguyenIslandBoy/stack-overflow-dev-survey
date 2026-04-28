@@ -1,5 +1,7 @@
 # Stack Overflow Developer Survey
 
+![CI](https://github.com/NguyenIslandBoy/stack-overflow-dev-survey/actions/workflows/ci.yml/badge.svg)
+
 End-to-end SQL analytics project using Stack Overflow Developer Survey data (2021–2025).
 Demonstrates advanced SQL across a real, messy, multi-year dataset: window functions,
 percentile aggregates, CTEs, cross-year normalization, and honest handling of schema breaks.
@@ -14,17 +16,22 @@ Built as a portfolio project targeting Data Analyst and Data Engineer roles.
 stack_overflow_dev_survey/
 ├── data/                          # Raw CSVs (not committed — see Data section)
 ├── notebooks/
-│   ├── eda.ipynb                  # Some basic exploratory analysis before ETL
+│   └── eda.ipynb                  # Exploratory analysis
 ├── src/
-│   ├── ingest.py                  # Load CSVs → DuckDB (responses, lang_exploded, db_exploded)
-│   └── cleaning.py                # Build responses_clean view with normalized columns
+│   └── survey/
+│       ├── ingest.py              # Load CSVs → DuckDB
+│       └── cleaning.py            # Build responses_clean view
+├── tests/
+│   └── test_survey.py             # 53 unit tests (pytest)
 ├── analysis/
-│   ├── 00_cleaning_validation.sql # Data quality checks — null rates, distribution checks
-│   ├── 01_language_trends.sql     # Language adoption trends with LAG/LEAD
-│   ├── 02_salary_percentiles.sql  # Salary by country, experience, and dev type
-│   ├── 03_remote_work_trends.sql  # Remote work shift 2022–2025
-│   └── 04_devtype_salary_gap.sql  # Salary ranking, spread, and AI adoption by role
-├── survey.duckdb                  # DuckDB database (generated — not committed)
+│   ├── 00_cleaning_validation.sql
+│   ├── 01_language_trends.sql
+│   ├── 02_salary_percentiles.sql
+│   ├── 03_remote_work_trends.sql
+│   └── 04_devtype_salary_gap.sql
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── requirements.txt
 └── README.md
 ```
@@ -58,8 +65,8 @@ pip install -r requirements.txt
 Run the pipeline from the project root:
 
 ```bash
-python EDA/ingest.py
-python EDA/cleaning.py
+python -m src.survey.ingest
+python -m src.survey.cleaning
 ```
 
 Run any analysis file with the DuckDB CLI:
@@ -200,5 +207,3 @@ vs salary, and headcount trends.
   chose to answer compensation questions). Treat 2024 salary figures as indicative only.
 - **Primary dev type only**: respondents can select multiple dev types; this analysis
   uses only the first listed value for aggregation.
-
-![CI](https://github.com/NguyenIslandBoy/stack-overflow-dev-survey/actions/workflows/ci.yml/badge.svg)
