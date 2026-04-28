@@ -4,3 +4,10 @@ survey.duckdb
 __pycache__/
 *.pyc
 .DS_Store
+.env
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+notebooks/.ipynb_checkpoints/
