@@ -13,8 +13,9 @@ Built as a portfolio project targeting Data Analyst and Data Engineer roles.
 ```
 stack_overflow_dev_survey/
 ├── data/                          # Raw CSVs (not committed — see Data section)
-├── EDA/
+├── notebooks/
 │   ├── eda.ipynb                  # Some basic exploratory analysis before ETL
+├── src/
 │   ├── ingest.py                  # Load CSVs → DuckDB (responses, lang_exploded, db_exploded)
 │   └── cleaning.py                # Build responses_clean view with normalized columns
 ├── analysis/
