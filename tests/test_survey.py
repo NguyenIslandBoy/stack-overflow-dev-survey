@@ -414,17 +414,11 @@ class TestCleanViewEmployment:
     def test_freelance(self, mem_con):
         assert self._get_emp(mem_con, "Independent contractor, freelancer, or self-employed") == "Self-employed"
 
-    def test_student_full_time_bug(self, mem_con):
-        # BUG in cleaning.py: The CASE statement checks employment/part-time
-        # before student, so any "Student, full-time" or "Student, part-time"
-        # is misclassified. Fix: move the student WHEN branch to the top of the
-        # CASE expression, before the employed branches.
-        # These tests document current (broken) behaviour. When you fix cleaning.py,
-        # change both assertions to == "Student".
-        assert self._get_emp(mem_con, "Student, full-time") == "Employed FT"
+    def test_student_full_time(self, mem_con):
+        assert self._get_emp(mem_con, "Student, full-time") == "Student"
 
-    def test_student_part_time_bug(self, mem_con):
-        assert self._get_emp(mem_con, "Student, part-time") == "Employed PT"
+    def test_student_part_time(self, mem_con):
+        assert self._get_emp(mem_con, "Student, part-time") == "Student"
 
     def test_not_employed(self, mem_con):
         assert self._get_emp(mem_con, "Not employed, but looking for work") == "Not employed"
