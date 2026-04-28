@@ -88,6 +88,7 @@ def build_clean_view(con: duckdb.DuckDBPyConnection) -> None:
 
         -- 6. Employment: collapse to 5 canonical types
         CASE
+            WHEN employment ILIKE '%student%'      THEN 'Student'
             WHEN employment ILIKE '%full-time%'
               OR employment ILIKE '%full time%'
               OR employment = 'Employed'           THEN 'Employed FT'
@@ -97,7 +98,6 @@ def build_clean_view(con: duckdb.DuckDBPyConnection) -> None:
               OR employment ILIKE '%freelance%'
               OR employment ILIKE '%contractor%'
               OR employment ILIKE '%independent%'  THEN 'Self-employed'
-            WHEN employment ILIKE '%student%'      THEN 'Student'
             WHEN employment ILIKE '%not employed%'
               OR employment ILIKE '%retired%'      THEN 'Not employed'
             ELSE 'Other'
